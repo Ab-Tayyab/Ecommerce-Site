@@ -28,6 +28,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.2",
     "react-bootstrap-drawer": "^1.0.1",
+    "react-hot-toast": "^2.4.0",
     "react-silk": "^0.0.1",
     "react-slideshow-image": "^4.2.1",
     "react-toastify": "^9.1.2"

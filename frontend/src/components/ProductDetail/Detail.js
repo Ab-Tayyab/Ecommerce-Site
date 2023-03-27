@@ -8,9 +8,13 @@ import Message from '../message/Message';
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetail } from '../../actions/productActions';
 import { Form } from 'react-bootstrap';
+import { addToCart } from '../../actions/cartActions';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer'
 
 
 const Detail = () => {
+  const [show, setShow] = useState(false);
   const [qty, setQty] = useState(1)
   let navigate = useNavigate()
 
@@ -24,12 +28,29 @@ const Detail = () => {
   }, [dispatch, id])
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`);
+    // navigate(`/cart/${id}?qty=${qty}`);
+    dispatch(addToCart(id, qty));
+
+  }
+
+  const notify = () => {
+    setShow(true)
+  }
+  const handleSubmit = () => {
+    addToCartHandler()
+    notify()
   }
 
 
   return (
     <>
+      <ToastContainer position='top-end'>
+        <Toast bg='success' onClose={() => setShow(false)} show={show} delay={1000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">Item Add Successfully</strong>
+          </Toast.Header>
+        </Toast>
+      </ToastContainer>
       <Link to="/" className='btn btn-light my-3'>
         Go to Home
       </Link>
@@ -119,10 +140,28 @@ const Detail = () => {
                     <Button className='btn-block'
                       type='button'
                       disabled={product?.countInStock === 0}
-                      onClick={addToCartHandler}
+                      onClick={handleSubmit}
+                      style={{
+                        width: "100%",
+                        marginBottom: "10px",
+                        border: "none",
+                        background: "#b59677",
+                      }}
                     >
                       Add to Cart
                     </Button>
+                    <Link to="/cart">
+                      <Button className='btn-block'
+                        type='button'
+                        style={{
+                          width: "100%",
+                          background: " #878787",
+                          border: "none",
+                        }}
+                      >
+                        View Cart
+                      </Button>
+                    </Link>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -130,6 +169,7 @@ const Detail = () => {
           </Row>
         )
       }
+
     </>
   )
 }

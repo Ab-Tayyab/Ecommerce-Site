@@ -5,14 +5,13 @@ import { Navbar, Container, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-import {Link} from "react-router-dom"
 import logo from "./logo.png";
+import SimpleDrawer from "../Drawer/DrawerCart";
 
 const Navebar = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(userInfo)
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -35,7 +34,7 @@ const Navebar = () => {
 
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
-                  {userInfo.email ==="main_admin_hun_yar@gmail.com" ? (
+                  {userInfo.email === "main_admin_hun_yar@gmail.com" ? (
 
                     <LinkContainer to="/dashboard">
                       <NavDropdown.Item>Dashboard</NavDropdown.Item>
@@ -46,7 +45,7 @@ const Navebar = () => {
                     </LinkContainer>
                   )}
                   <LinkContainer to="/" style={{
-                    textDecoration:"none"
+                    textDecoration: "none"
                   }}>
                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                   </LinkContainer>
@@ -58,16 +57,7 @@ const Navebar = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <LinkContainer
-                to="/cart"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
-                </Nav.Link>
-              </LinkContainer>
+              <SimpleDrawer />
             </Nav>
           </Navbar.Collapse>
         </Container>
