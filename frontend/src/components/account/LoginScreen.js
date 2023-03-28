@@ -15,7 +15,6 @@ const LoginScreen = () => {
   const { loading, error, userInfo } = userLogin;
   const location = useLocation();
   const navigate = useNavigate();
-
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
@@ -54,7 +53,12 @@ const LoginScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit" variant="primary">
+        <Button type="submit" style={{
+          background: "#b59677",
+          width: "100%",
+          border: "none",
+          marginTop: "10px"
+        }}>
           Sign In
         </Button>
       </Form>
@@ -62,8 +66,11 @@ const LoginScreen = () => {
       <Row className="py-3">
         <Col>
           New Cusomer? {""}
-          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register
+          <Link to={redirect ? `/signup?redirect=${redirect}` : "/signup"} style={{
+            color: "#b59677",
+            textDecoration: "none",
+          }}>
+            Create Your Account
           </Link>
         </Col>
       </Row>

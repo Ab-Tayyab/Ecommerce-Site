@@ -44,14 +44,14 @@ const Detail = () => {
 
   return (
     <>
-      <ToastContainer position='top-end'>
+      <ToastContainer position='middle-center'>
         <Toast bg='success' onClose={() => setShow(false)} show={show} delay={1000} autohide>
           <Toast.Header>
             <strong className="me-auto">Item Add Successfully</strong>
           </Toast.Header>
         </Toast>
       </ToastContainer>
-      <Link to="/" className='btn btn-light my-3'>
+      <Link to="/" className='btn btn-light my-3 mb-5'>
         Go to Home
       </Link>
       {
@@ -63,7 +63,7 @@ const Detail = () => {
           <Row>
             <Col md="6">
               <Image src={product?.image} alt={product?.name} fluid style={{
-                height: "500px"
+                height: "320px"
               }} />
             </Col >
             <Col md={3}>
@@ -84,8 +84,10 @@ const Detail = () => {
                   Price: ${product?.price}
                 </ListGroup.Item>
 
-                <ListGroup.Item>
-                  Description: ${product?.description}
+                <ListGroup.Item style={{
+                  textAlign:"justify"
+                }}>
+                  Description: {product?.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>

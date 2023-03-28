@@ -141,6 +141,11 @@ const PlaceOrderScreen = () => {
                   className="btn-block"
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
+                  style={{
+                    background: "#b59677",
+                    border: "none",
+                    width: "100%",
+                  }}
                 >
                   Place Order
                 </Button>

@@ -109,6 +109,11 @@ const ShoppingCart = () => {
                 className="btn-block"
                 disabled={cartItems.length === 0}
                 onClick={chackoutHandler}
+                style={{
+                  background:"#b59677",
+                  border:"none",
+                  width:"100%"
+                }}
               >
                 Proceed To Checkout
               </Button>

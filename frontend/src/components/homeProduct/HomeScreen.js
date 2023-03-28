@@ -63,7 +63,8 @@ const HomeScreen = () => {
             >
               <Link to="allitems">
                 <Button style={{
-                  background:"#192655"
+                  background:"#192655",
+                  border:"none"
                 }}>Explore All Products</Button>
               </Link>
             </Col>

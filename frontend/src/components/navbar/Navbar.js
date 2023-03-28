@@ -6,7 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 import logo from "./logo.png";
-import SimpleDrawer from "../Drawer/DrawerCart";
+import CartDrawer from "../Drawer/DrawerCart";
 
 const Navebar = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,8 @@ const Navebar = () => {
     dispatch(logout());
   };
 
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   return (
     <header>
       <Navbar bg="bright" variant="white" expand="lg">
@@ -53,11 +55,17 @@ const Navebar = () => {
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i> Sign In
+                    <i className="fas fa-user" style={{
+                      color: "#b59677",
+                      fontSize: "30px"
+                    }}></i>
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <SimpleDrawer />
+              <CartDrawer />
+              <h5>
+                {cartItems.qty}
+              </h5>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -8,7 +8,7 @@ import {
 import Message from "../message/Message";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
 
-const SimpleDrawer = () => {
+const CartDrawer = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpen = () => {
@@ -26,6 +26,10 @@ const SimpleDrawer = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
+
+    const q = cartItems.map((p) => {
+        return p.qty
+    })
     // debugger
     useEffect(() => {
         if (productId) {
@@ -49,10 +53,22 @@ const SimpleDrawer = () => {
     return (
         <>
             <div onClick={handleOpen} style={{
-                cursor:"pointer",
-                marginTop:"10px"
+                cursor: "pointer",
+                marginTop: "10px"
             }}>
-                <i className="fas fa-shopping-cart"></i> Cart
+                <div style={{
+                    display: "flex"
+                }}>
+                    <i className="fas fa-shopping-cart" style={{
+                        fontSize: "30px",
+                        marginLeft: "20px",
+                        color: "#b59677"
+                    }}>
+                    </i>
+                    <p>
+                        ({q})
+                    </p>
+                </div>
             </div>
             <Offcanvas show={isOpen} onHide={handleClose} placement="end" style={{ width: '350px' }}>
                 <Offcanvas.Header closeButton>
@@ -192,4 +208,4 @@ const SimpleDrawer = () => {
     );
 };
 
-export default SimpleDrawer;
+export default CartDrawer;

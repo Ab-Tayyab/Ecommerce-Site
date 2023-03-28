@@ -3,7 +3,7 @@ import { authUser, getUserProfile,registerUser } from "../controller/userControl
 import { protect } from "../middleware/authMiddleWare.js";
 const router = express.Router();
 
-router.route("/").post(registerUser);
+router.route("/create").post(registerUser);
 router.post("/login", authUser);
 router.route("/profile").get(protect, getUserProfile);
 

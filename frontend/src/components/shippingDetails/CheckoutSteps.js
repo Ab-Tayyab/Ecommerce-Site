@@ -7,7 +7,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
     <Nav className="justify-content-center mb-4">
       <Nav.Item>
         {step1 ? (
-          <LinkContainer to="/login">
+          <LinkContainer to="/login" style={{
+            color:"#b59677"
+          }}>
             <Nav.Link>Sign In</Nav.Link>
           </LinkContainer>
         ) : (
@@ -17,7 +19,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step2 ? (
-          <LinkContainer to="/shipping">
+          <LinkContainer to="/shipping" style={{
+            color:"#b59677"
+          }}>
             <Nav.Link>Shipping</Nav.Link>
           </LinkContainer>
         ) : (
@@ -27,7 +31,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step3 ? (
-          <LinkContainer to="/payment">
+          <LinkContainer to="/payment" style={{
+            color:"#b59677"
+          }}>
             <Nav.Link>Payment</Nav.Link>
           </LinkContainer>
         ) : (
@@ -37,7 +43,9 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step4 ? (
-          <LinkContainer to="/placeorder">
+          <LinkContainer to="/placeorder" style={{
+            color:"#b59677"
+          }}>
             <Nav.Link>Place Order</Nav.Link>
           </LinkContainer>
         ) : (
