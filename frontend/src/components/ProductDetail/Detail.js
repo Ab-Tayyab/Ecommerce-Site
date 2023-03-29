@@ -15,8 +15,11 @@ import RelatedProducts from '../relatedProducts/RelatedProducts';
 
 
 const Detail = () => {
-  const [show, setShow] = useState(false);
   const [qty, setQty] = useState(1)
+  const [show, setShow] = useState(false);
+  const notify = () => {
+    setShow(true)
+  }
   let navigate = useNavigate()
 
 
@@ -25,9 +28,6 @@ const Detail = () => {
   const productsDetails = useSelector((state) => state.productsDetails)
   const { loading, error, product } = productsDetails
 
-  // var category = product.map((p)=>{
-  //   return p.category
-  // })
   useEffect(() => {
     dispatch(listProductDetail(id))
   }, [dispatch, id])
@@ -38,9 +38,6 @@ const Detail = () => {
 
   }
 
-  const notify = () => {
-    setShow(true)
-  }
   const handleSubmit = () => {
     addToCartHandler()
     notify()
@@ -49,13 +46,7 @@ const Detail = () => {
 
   return (
     <>
-      <ToastContainer position='middle-center'>
-        <Toast bg='success' onClose={() => setShow(false)} show={show} delay={1000} autohide>
-          <Toast.Header>
-            <strong className="me-auto">Item Add Successfully</strong>
-          </Toast.Header>
-        </Toast>
-      </ToastContainer>
+
       <Link to="/" className='btn btn-light my-3 mb-5'>
         Go to Home
       </Link>
@@ -90,7 +81,7 @@ const Detail = () => {
                 </ListGroup.Item>
 
                 <ListGroup.Item style={{
-                  textAlign:"justify"
+                  textAlign: "justify"
                 }}>
                   Description: {product?.description}
                 </ListGroup.Item>
@@ -177,8 +168,15 @@ const Detail = () => {
         )
       }
 
-      <RelatedProducts category={product.category}/>
+      <RelatedProducts category={product.category} />
 
+      <ToastContainer position='middle-center'>
+        <Toast bg='success' onClose={() => setShow(false)} show={show} delay={1000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">Item Add Successfully</strong>
+          </Toast.Header>
+        </Toast>
+      </ToastContainer>
     </>
   )
 }

@@ -1,47 +1,48 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../../actions/productActions";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProduct } from '../../actions/productActions';
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router";
 
-const CreateProduct = () => {
-    const dispatch = useDispatch();
+const UpdateProduct = () => {
 
-    const [name, setName] = useState("");
-    const [image, setImage] = useState("");
-    const [description, setDescription] = useState("");
-    const [brand, setBrand] = useState("");
-    const [category, setCategory] = useState("");
+    const { id } = useParams()
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
+    const [description, setDescription] = useState('');
+    const [brand, setBrand] = useState('');
+    const [category, setCategory] = useState('');
     const [price, setPrice] = useState(0);
     const [countInStock, setCountInStock] = useState(0);
     const [rating, setRating] = useState(0);
     const [numReviews, setNumReviews] = useState(0);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const product = {
-            name,
-            image,
-            description,
-            brand,
-            category,
-            price,
-            countInStock,
-            rating,
-            numReviews,
-        };
-        dispatch(createProduct(product));
-        setName("");
-        setImage("");
-        setDescription("");
-        setBrand("");
-        setCategory("");
-        setPrice(0);
-        setCountInStock(0);
-        setRating(0);
-        setNumReviews(0);
-    };
+    const dispatch = useDispatch();
 
+    const productUpdate = useSelector((state) => state.productUpdate);
+    const { loading, error, success } = productUpdate;
+
+    useEffect(() => {
+    }, [id]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(
+            updateProduct(id, {
+                name,
+                image,
+                description,
+                brand,
+                category,
+                price,
+                countInStock,
+                rating,
+                numReviews
+            })
+        );
+        alert("Product Update Successfully")
+    };
     return (
         <>
             <Link to="/dashboard">
@@ -51,9 +52,9 @@ const CreateProduct = () => {
                         background: "#b59677",
                       }}>Go to Dashboard</Button>
             </Link>
-            <h1 style={{
-                textAlign: "center"
-            }}>Create New Product</h1>
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {success && <p>Product updated successfully</p>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
@@ -152,11 +153,11 @@ const CreateProduct = () => {
                         border: "none",
                         background: "#b59677",
                       }}>
-                    Create Product
+                    Update Product
                 </Button>
             </Form>
         </>
     );
-}
+};
 
-export default CreateProduct
+export default UpdateProduct

@@ -62,10 +62,11 @@ const HomeScreen = () => {
               }}
             >
               <Link to="allitems">
-                <Button style={{
-                  background:"#192655",
-                  border:"none"
-                }}>Explore All Products</Button>
+                <Button  style={{
+                        marginBottom: "10px",
+                        border: "none",
+                        background: "#b59677",
+                      }}>Explore All Products</Button>
               </Link>
             </Col>
           </Row>

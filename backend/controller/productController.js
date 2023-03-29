@@ -67,4 +67,54 @@ const addProducts = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProductById, getProducts,addProducts,deleteProductById };
+const updateProduct = asyncHandler(async (req, res) => {
+  const {
+    name,
+    image,
+    description,
+    brand,
+    category,
+    price,
+    countInStock,
+    rating,
+    numReviews,
+  } = req.body;
+
+  const product = await Product.findById(req.params.id);
+
+  if (!req || !req.params || !product) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  if (product) {
+    product.name = name || product.name;
+    product.image = image || product.image;
+    product.description = description || product.description;
+    product.brand = brand || product.brand;
+    product.category = category || product.category;
+    product.price = price || product.price;
+    product.countInStock = countInStock || product.countInStock;
+    product.rating = rating || product.rating;
+    product.numReviews = numReviews || product.numReviews;
+
+    const updatedProduct = await product.save();
+
+    res.json({
+      _id: updatedProduct._id,
+      name: updatedProduct.name,
+      image: updatedProduct.image,
+      description: updatedProduct.description,
+      brand: updatedProduct.brand,
+      category: updatedProduct.category,
+      price: updatedProduct.price,
+      countInStock: updatedProduct.countInStock,
+      rating: updatedProduct.rating,
+      numReviews: updatedProduct.numReviews,
+    });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+export { getProductById, getProducts, addProducts, deleteProductById, updateProduct };

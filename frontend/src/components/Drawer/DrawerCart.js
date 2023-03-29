@@ -27,10 +27,6 @@ const CartDrawer = () => {
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
 
-    const q = cartItems.map((p) => {
-        return Number(p.qty)
-    })
-    // debugger
     useEffect(() => {
         if (productId) {
             dispatch(addToCart(productId, qty));
@@ -65,9 +61,6 @@ const CartDrawer = () => {
                         color: "#b59677"
                     }}>
                     </i>
-                    <p>
-                        ({q})
-                    </p>
                 </div>
             </div>
             <Offcanvas show={isOpen} onHide={handleClose} placement="end" style={{ width: '350px' }}>
@@ -79,8 +72,10 @@ const CartDrawer = () => {
                         <div md={8}>
                             {cartItems.length === 0 ? (
                                 <Message>
-                                    Your Cart Is Empty
-                                    <Link to="/allitems" onClick={handleClose}>Go Back</Link>
+                                    Your Cart Is Empty! 
+                                    <Link to="/allitems" onClick={handleClose} style={{
+                                        color:"#b59677"
+                                    }}> Go Back</Link>
                                 </Message>
                             ) : (
                                 <div>

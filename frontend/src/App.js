@@ -16,6 +16,7 @@ import CreateProduct from "./components/dashboard/CreateProduct";
 import { Container } from "react-bootstrap";
 import LogginScreen from './components/account/LoginScreen'
 import SignupScreen from './components/account/SignupScreen'
+import UpdateProduct from "./components/dashboard/UpdateProduct";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/createProduct" element={<CreateProduct />} />
+              <Route path="/update/:id/" element={<UpdateProduct />} />
               <Route path="/login" element={<LogginScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
             </Routes>

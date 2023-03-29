@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts, listProductDelete } from "../../actions/productActions";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import Loader from "../loader/Loader";
 import Message from "../message/Message";
 import { Link } from "react-router-dom";
@@ -47,7 +47,11 @@ const DeleteAndShowProduct = () => {
     return (
         <>
             <Link to="/createProduct">
-                <Button>Create Product</Button>
+                <Button  style={{
+                        marginBottom: "10px",
+                        border: "none",
+                        background: "#b59677",
+                      }}>Create Product</Button>
             </Link>
             <h3
                 style={{
@@ -63,7 +67,7 @@ const DeleteAndShowProduct = () => {
                 style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    marginBottom:"20px"
+                    marginBottom: "20px"
                 }}
             >
                 <input
@@ -122,6 +126,21 @@ const DeleteAndShowProduct = () => {
                                 style={{
                                     cursor: "pointer"
                                 }}></i>
+
+                            <Link
+                                className="edit"
+                                to={`/update/${product._id}`}
+                                style={{
+                                    textDecoration: "none",
+                                    color:"black"
+                                }}
+                            >
+                                <i class="fa-solid fa-edit"
+                                    style={{
+                                        cursor: "pointer"
+                                    }}>
+                                </i>
+                            </Link>
                         </div>
                     ))}
                 </Row>
