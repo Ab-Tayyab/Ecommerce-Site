@@ -11,6 +11,7 @@ import { Form } from 'react-bootstrap';
 import { addToCart } from '../../actions/cartActions';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer'
+import RelatedProducts from '../relatedProducts/RelatedProducts';
 
 
 const Detail = () => {
@@ -23,6 +24,10 @@ const Detail = () => {
   const dispatch = useDispatch()
   const productsDetails = useSelector((state) => state.productsDetails)
   const { loading, error, product } = productsDetails
+
+  // var category = product.map((p)=>{
+  //   return p.category
+  // })
   useEffect(() => {
     dispatch(listProductDetail(id))
   }, [dispatch, id])
@@ -171,6 +176,8 @@ const Detail = () => {
           </Row>
         )
       }
+
+      <RelatedProducts category={product.category}/>
 
     </>
   )

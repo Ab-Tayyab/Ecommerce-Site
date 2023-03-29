@@ -28,7 +28,7 @@ const CartDrawer = () => {
     const { cartItems } = cart;
 
     const q = cartItems.map((p) => {
-        return p.qty
+        return Number(p.qty)
     })
     // debugger
     useEffect(() => {

@@ -63,9 +63,6 @@ const Navebar = () => {
                 </LinkContainer>
               )}
               <CartDrawer />
-              <h5>
-                {cartItems.qty}
-              </h5>
             </Nav>
           </Navbar.Collapse>
         </Container>
