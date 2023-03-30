@@ -32,4 +32,9 @@ const addOrderItem = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItem };
+const getOrders = asyncHandler(async (req, res) => {
+  const Orders = await Order.find({});
+  res.json(Orders);
+});
+
+export { addOrderItem, getOrders };

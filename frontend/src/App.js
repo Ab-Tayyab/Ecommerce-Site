@@ -17,6 +17,7 @@ import { Container } from "react-bootstrap";
 import LogginScreen from './components/account/LoginScreen'
 import SignupScreen from './components/account/SignupScreen'
 import UpdateProduct from "./components/dashboard/UpdateProduct";
+import OrdersList from "./components/dashboard/ShowOrders";
 
 function App() {
   return (
@@ -44,8 +45,9 @@ function App() {
               <Route path="/payment" element={<PaymentScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/dashboard" element={<DashBoard />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:id" element={<Profile />} />
               <Route path="/createProduct" element={<CreateProduct />} />
+              <Route path="/orderlist" element={<OrdersList />} />
               <Route path="/update/:id/" element={<UpdateProduct />} />
               <Route path="/login" element={<LogginScreen />} />
               <Route path="/signup" element={<SignupScreen />} />

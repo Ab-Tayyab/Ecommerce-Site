@@ -53,6 +53,14 @@ const DeleteAndShowProduct = () => {
                         background: "#b59677",
                       }}>Create Product</Button>
             </Link>
+            <Link to="/orderlist">
+                <Button  style={{
+                        marginBottom: "10px",
+                        border: "none",
+                        background: "#b59677",
+                        marginLeft:"20px"
+                      }}>Order List</Button>
+            </Link>
             <h3
                 style={{
                     textAlign: "center",

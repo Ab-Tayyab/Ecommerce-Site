@@ -7,11 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 import logo from "./logo.png";
 import CartDrawer from "../Drawer/DrawerCart";
+import { Link } from "react-router-dom";
 
 const Navebar = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  // var id = userInfo._id
+  // console.log(id,"ma b hun")
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -36,13 +40,15 @@ const Navebar = () => {
 
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
-                  {userInfo.email === "main_admin_hun_yar@gmail.com" ? (
+                  {userInfo.isAdmin ? (
 
                     <LinkContainer to="/dashboard">
                       <NavDropdown.Item>Dashboard</NavDropdown.Item>
                     </LinkContainer>
                   ) : (
-                    <LinkContainer to="/profile">
+                    <LinkContainer
+                    to={`/profile/${userInfo._id}`}
+                    >
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
                   )}

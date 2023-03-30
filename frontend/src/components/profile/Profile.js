@@ -1,8 +1,14 @@
 import React from 'react'
+// import OrdersScreen from './GetOrderById'
+// import { useParams } from "react-router";
 
 const Profile = () => {
+  // const { id } = useParams()
   return (
-    <div>Profile</div>
+
+    <div>
+      {/* <OrdersScreen id={id}/> */}
+    </div>
   )
 }
 
