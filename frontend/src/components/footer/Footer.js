@@ -15,7 +15,7 @@ const Footer = () => {
             <Col className="text-center py-3"> Designed and Powered by Self Production.</Col>
             <Col className="text-center py-3">
               <a
-                href="https://wa.me/+923184579618"
+                href="https://wa.me/+923085630574"
                 class="whatsapp_float"
                 target="_blank"
                 rel="noopener noreferrer"
