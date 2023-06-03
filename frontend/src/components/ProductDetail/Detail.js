@@ -33,8 +33,8 @@ const Detail = () => {
   }, [dispatch, id])
 
   const addToCartHandler = () => {
-    // navigate(`/cart/${id}?qty=${qty}`);
-    dispatch(addToCart(id, qty));
+    navigate(`/cart/${id}?qty=${qty}`);
+    // dispatch(addToCart(id, qty));
 
   }
 

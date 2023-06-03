@@ -11,7 +11,8 @@ const Header = () => {
         style={{
           background: "#192655",
           color: "white",
-          paddingTop:"15px"
+          paddingTop:"15px",
+          zIndex:"100"
         }}
       >
         <Row>

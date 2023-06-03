@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listOrders } from "../../actions/orderActions";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import OrderDetails from "./OrderDetail";
 
 const OrdersList = () => {
     const dispatch = useDispatch();
@@ -29,27 +30,18 @@ const OrdersList = () => {
             ) : error ? (
                 <p>{error}</p>
             ) : (
-                <ul style={{
+                <div style={{
+                    display: "flex",
+                    flexWrap: "wrap",
                     width:"100%",
-                    display:"flex",
-                    justifyContent:"space-around",
-                    listStyle:"none"
+                    justifyContent:"space-between"
                 }}>
-                    {orders.map((order) => (
-                        <li key={order._id} style={{
-                            border:"1px solid gray",
-                            padding:"20px",
-                            borderRadius:"5px",
-                            boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
-                        }}>
-                            <p>Order ID: {order._id}</p>
-                            <p>User ID: {order.user}</p>
-                            <p>Total Price: ${order.totalPrice}</p>
-                            <p>Is Paid: {order.isPaid ? "Yes" : "No"}</p>
-                            <p>Is Delivered: {order.isDelivered ? "Yes" : "No"}</p>
-                        </li>
-                    ))}
-                </ul>
+                    {
+                        orders.map((order) => (
+                            <OrderDetails order={order} />
+                        ))
+                    }
+                </div>
             )}
         </div>
     );

@@ -4,27 +4,31 @@ import { updateProduct } from '../../actions/productActions';
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
+import { listProductDetail } from '../../actions/productActions';
+
 
 const UpdateProduct = () => {
 
     const { id } = useParams()
-    const [name, setName] = useState('');
-    const [image, setImage] = useState('');
-    const [description, setDescription] = useState('');
-    const [brand, setBrand] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState(0);
-    const [countInStock, setCountInStock] = useState(0);
-    const [rating, setRating] = useState(0);
-    const [numReviews, setNumReviews] = useState(0);
+    const productsDetails = useSelector((state) => state.productsDetails)
+    const { product } = productsDetails
+    const [name, setName] = useState(product.name || '');
+    const [image, setImage] = useState(product.image || '');
+    const [description, setDescription] = useState(product.description || '');
+    const [brand, setBrand] = useState(product.brand || '');
+    const [category, setCategory] = useState(product.category || '');
+    const [price, setPrice] = useState(product.price || 0);
+    const [countInStock, setCountInStock] = useState(product.countInStock || 0);
+    const [rating, setRating] = useState(product.rating || 0);
+    const [numReviews, setNumReviews] = useState(product.numReviews || 0);
 
     const dispatch = useDispatch();
 
     const productUpdate = useSelector((state) => state.productUpdate);
     const { loading, error, success } = productUpdate;
-
     useEffect(() => {
-    }, [id]);
+        dispatch(listProductDetail(id))
+    }, [dispatch, id])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,11 +50,11 @@ const UpdateProduct = () => {
     return (
         <>
             <Link to="/dashboard">
-                <Button  style={{
-                        marginBottom: "10px",
-                        border: "none",
-                        background: "#b59677",
-                      }}>Go to Dashboard</Button>
+                <Button style={{
+                    marginBottom: "10px",
+                    border: "none",
+                    background: "#b59677",
+                }}>Go to Dashboard</Button>
             </Link>
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
@@ -147,12 +151,12 @@ const UpdateProduct = () => {
                     />
                 </Form.Group>
 
-                <Button type="submit"  style={{
-                        width: "100%",
-                        marginTop: "10px",
-                        border: "none",
-                        background: "#b59677",
-                      }}>
+                <Button type="submit" style={{
+                    width: "100%",
+                    marginTop: "10px",
+                    border: "none",
+                    background: "#b59677",
+                }}>
                     Update Product
                 </Button>
             </Form>
