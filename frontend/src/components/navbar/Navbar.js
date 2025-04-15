@@ -30,10 +30,12 @@ const Navebar = () => {
             to="/"
             style={{
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             <img src={logo} alt="Logo" width="150px" />
           </LinkContainer>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -47,7 +49,7 @@ const Navebar = () => {
                     </LinkContainer>
                   ) : (
                     <LinkContainer
-                    to={`/profile/${userInfo._id}`}
+                      to={`/profile/${userInfo._id}`}
                     >
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>

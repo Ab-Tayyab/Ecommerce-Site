@@ -18,6 +18,8 @@ import LogginScreen from './components/account/LoginScreen'
 import SignupScreen from './components/account/SignupScreen'
 import UpdateProduct from "./components/dashboard/UpdateProduct";
 import OrdersList from "./components/dashboard/ShowOrders";
+import TermsAndConditions from "./components/pages/TermsAndCondition";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -51,6 +53,8 @@ function App() {
               <Route path="/update/:id/" element={<UpdateProduct />} />
               <Route path="/login" element={<LogginScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/terms" element={<TermsAndConditions />}/>
+              <Route path="/privacy" element={<PrivacyPolicy />}/>
             </Routes>
           </Container>
         </main>

@@ -7,7 +7,7 @@ import { savePaymentMethod } from "../../actions/cartActions";
 import { useNavigate } from "react-router-dom";
 
 const PaymentScreen = () => {
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,8 +33,8 @@ const PaymentScreen = () => {
           <Col>
             <Form.Check
               type="radio"
-              label="PayPal or Credit Card"
-              id="PayPal"
+              label="Cash on Delivery"
+              id="COD"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>

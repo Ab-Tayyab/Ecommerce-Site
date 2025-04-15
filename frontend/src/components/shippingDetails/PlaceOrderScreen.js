@@ -1,6 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import {
+  Button,
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Card,
+  Modal,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../message/Message";
 import CheckoutSteps from "./CheckoutSteps";
@@ -11,7 +19,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
 
-  //   Calculate prices
+  // Calculate prices
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
@@ -30,12 +38,23 @@ const PlaceOrderScreen = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     if (success) {
-      navigate(`/order/${order._id}`);
+      dispatch({ type: "CART_CLEAR_ITEMS" });
+      localStorage.removeItem("cartItems");
+      navigate(`/`);
+      
     }
-  }, [navigate, success]);
+  }, [navigate, success, order]);
+
+  // Show modal and generate tracking ID
   const placeOrderHandler = () => {
+    setShowModal(true);
+  };
+
+  const confirmOrderHandler = () => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -47,7 +66,9 @@ const PlaceOrderScreen = () => {
         totalPrice: cart.totalPrice,
       })
     );
+    setShowModal(false);
   };
+
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -57,9 +78,10 @@ const PlaceOrderScreen = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Address:</strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city},
-                {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
+                <strong>Address:</strong>{" "}
+                {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
+                {cart.shippingAddress.postalCode},{" "}
+                {cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
 
@@ -92,7 +114,8 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.qty} x ${item.price} = $
+                          {(item.qty * item.price).toFixed(2)}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -102,6 +125,7 @@ const PlaceOrderScreen = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
+
         <Col md={4}>
           <Card>
             <ListGroup variant="flush">
@@ -139,7 +163,7 @@ const PlaceOrderScreen = () => {
                 <Button
                   type="button"
                   className="btn-block"
-                  disabled={cart.cartItems === 0}
+                  disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
                   style={{
                     background: "#b59677",
@@ -154,6 +178,32 @@ const PlaceOrderScreen = () => {
           </Card>
         </Col>
       </Row>
+
+      {/* Confirmation Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Your Order</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <strong>Total Amount:</strong> ${cart.totalPrice}
+          </p>
+          <p>
+            Please confirm to place your order.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </Button>
+          <Button
+            style={{ background: "#b59677", border: "none" }}
+            onClick={confirmOrderHandler}
+          >
+            Confirm & Place Order
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
